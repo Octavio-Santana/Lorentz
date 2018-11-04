@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Equações de Lorentz</title>
+</head>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {
+            equationNumbers: {  autoNumber: "AMS"  },
+            extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+        }
+    });
+</script>
+<script type="text/javascript"
+         src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<body>   
+
+    Esta página visualiza a solução numérica da Equação de Lorentz
+    <br><br>
+    \(    
+        \frac{dx}{dt} = s*(y - x),
+    \)
+    \(
+        \frac{dy}{dt} = x*(r - z) - y,
+    \)
+    \(
+        \frac{dz}{dt} = x*y - b*z 
+    \)
+    <br><br>
+    <!--
+    <br><br>
+    \(
+        \begin{eqnarray}
+        \frac{dx}{dt} &=& s*(y - x) \nonumber\\
+        \frac{dx}{dt} &=& x*(r - z) - y \nonumber\\
+        \frac{dz}{dt} &=& x*y - b*z \nonumber
+        \end{eqnarray}
+    \).
+    <br><br>
+    -->
+    <form method="post" action="">
+        <table>
+            <tr>
+                <td>
+                    <table>
+                        {% for field in form %}
+                            <tr>
+                                <td>{{ field.name }}</td>
+                                <td>{{ field }}</td>
+                                <td>{{ field.label }}</td>
+
+                                {% if field.errors %}
+                                    {% for error in field.errors %}
+                                        <td class='dot' style="color: red;">({{ error }})</td>
+                                    {% endfor %}
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </td>
+
+                <td>
+                    <p>
+                        {% if result != None %}
+                            <img src="data:image/png;base64, {{ result }}" width="500">
+                        {% endif %}
+                    </p>                    
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p>
+                        <input type="submit" value="Compute">
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
